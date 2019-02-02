@@ -33,13 +33,13 @@ namespace WPFTest
                     {
                         client.EnableSsl = true;
 
-                        var user_name = UserNameEdit.Text;
-                        SecureString user_password = PasswordBoxEdit.SecurePassword;
-                        client.Credentials = new NetworkCredential(user_name, user_password);
+                        //var user_name = UserNameEdit.Text;
+                        //SecureString user_password = PasswordBoxEdit.SecurePassword;
+                        //client.Credentials = new NetworkCredential(user_name, user_password);
 
-                        client.Send(message);
-                        MessageBox.Show("Почта успешно отправилена", "Успех!",
-                            MessageBoxButton.OK, MessageBoxImage.Information);
+                        //client.Send(message);
+                        //MessageBox.Show("Почта успешно отправилена", "Успех!",
+                        //    MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }

@@ -26,16 +26,27 @@
             <TabItem Header="Списки">
                 <DockPanel>
                     <ToolBarTray DockPanel.Dock="Top">
+                        <ToolBarTray.Resources>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Height" Value="20"/>
+                            </Style>
+                        </ToolBarTray.Resources>
                         <ToolBar>
-                           <Label Content="Сервера:" Margin="25,0,0,0"/>
-                           <ComboBox MinWidth="170" MaxWidth="200" SelectedIndex="0">
-                               <ComboBoxItem>Сервер 1</ComboBoxItem>
-                               <ComboBoxItem>Сервер 2</ComboBoxItem>
-                               <ComboBoxItem>Сервер 3</ComboBoxItem>
-                           </ComboBox>
-                           <Button Content="Добавить"/>
-                           <Button Content="Редактировать"/>
-                           <Button Content="Удалить"/>
+                            <Label Content="Сервера:" Margin="18,0,0,0"/>
+                            <ComboBox MinWidth="170" MaxWidth="200" SelectedIndex="0">
+                                <ComboBoxItem>Сервер 1</ComboBoxItem>
+                                <ComboBoxItem>Сервер 2</ComboBoxItem>
+                                <ComboBoxItem>Сервер 3</ComboBoxItem>
+                            </ComboBox>
+                            <Button ToolTip="Добавить">
+                                <Image Source="src/add.png"/>
+                            </Button>
+                            <Button ToolTip="Редактировать">
+                                <Image Source="src/edit.png"/>
+                            </Button>
+                            <Button ToolTip="Удалить">
+                                <Image Source="src/remove.png"/>
+                            </Button>
                         </ToolBar>
                         <ToolBar Band="1">
                             <TextBlock Text="Отправители:" VerticalAlignment="Center" />
@@ -44,21 +55,71 @@
                                 <ComboBoxItem>Сервер 2</ComboBoxItem>
                                 <ComboBoxItem>Сервер 3</ComboBoxItem>
                             </ComboBox>
-                            <Button Content="Добавить"/>
-                            <Button Content="Редактировать"/>
-                            <Button Content="Удалить"/>
+                            <Button ToolTip="Добавить">
+                                <Image Source="src/add.png"/>
+                            </Button>
+                            <Button ToolTip="Редактировать">
+                                <Image Source="src/edit.png"/>
+                            </Button>
+                            <Button ToolTip="Удалить">
+                                <Image Source="src/remove.png"/>
+                            </Button>
                         </ToolBar>
                         <ToolBar>
                             <TextBlock Text="Перейти в планировщик" VerticalAlignment="Center"/>
-                            <Button Content="Перейти"/>
+                            <Button>
+                                <Image Source="src/clock.png"/>
+                            </Button>
                         </ToolBar>
-                    </ToolBarTray> 
-                    <Grid></Grid>
+                    </ToolBarTray>
+                    <GroupBox Header="Список получателей писем">
+                        <DataGrid AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" MinWidth="40"/>
+                                <DataGridTextColumn Header="Name" Width="*"/>
+                                <DataGridTextColumn Header="Address" MinWidth="150"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
                 </DockPanel>
             </TabItem>
-            <TabItem Header="Планировщик"></TabItem>
-            <TabItem Header="Редактор писем"></TabItem>
-            <TabItem Header="Статистика"></TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Планировщик"/>
+                        <Image Height="18" Source="src/scheduler.png" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Calendar/>
+                        <TextBlock Text="Время:"/>
+                        <TextBox/>
+                        <Button>Запланировать</Button>
+                        <Button>Отправить сейчас</Button>
+                    </StackPanel>
+                    <GroupBox Grid.Column="1" Header="Задачи планировщика">
+                        <ListBox></ListBox>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Редактор писем">
+                <DockPanel>
+                    <GroupBox Header="Письма">
+                        <DockPanel MinWidth="150" MaxWidth="200">
+                            <Button DockPanel.Dock="Bottom">Создать</Button>
+                            <Button DockPanel.Dock="Bottom">Сохранить</Button>
+                            <ListBox></ListBox>
+                        </DockPanel>
+                    </GroupBox>
+                    <GroupBox Header="Текст письма"></GroupBox>
+                </DockPanel>         
+            </TabItem>
+            <!--<TabItem Header="Статистика" IsEnabled="False"/>-->
         </TabControl>
     </DockPanel>
 </Window>
