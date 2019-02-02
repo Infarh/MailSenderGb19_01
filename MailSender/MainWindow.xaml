@@ -23,7 +23,39 @@
             <TextBlock Text="Готов к труду и обороне!"/>
         </StatusBar>
         <TabControl>
-            <TabItem Header="Списки"></TabItem>
+            <TabItem Header="Списки">
+                <DockPanel>
+                    <ToolBarTray DockPanel.Dock="Top">
+                        <ToolBar>
+                           <Label Content="Сервера:" Margin="25,0,0,0"/>
+                           <ComboBox MinWidth="170" MaxWidth="200" SelectedIndex="0">
+                               <ComboBoxItem>Сервер 1</ComboBoxItem>
+                               <ComboBoxItem>Сервер 2</ComboBoxItem>
+                               <ComboBoxItem>Сервер 3</ComboBoxItem>
+                           </ComboBox>
+                           <Button Content="Добавить"/>
+                           <Button Content="Редактировать"/>
+                           <Button Content="Удалить"/>
+                        </ToolBar>
+                        <ToolBar Band="1">
+                            <TextBlock Text="Отправители:" VerticalAlignment="Center" />
+                            <ComboBox MinWidth="170" MaxWidth="200" SelectedIndex="0">
+                                <ComboBoxItem>Сервер 1</ComboBoxItem>
+                                <ComboBoxItem>Сервер 2</ComboBoxItem>
+                                <ComboBoxItem>Сервер 3</ComboBoxItem>
+                            </ComboBox>
+                            <Button Content="Добавить"/>
+                            <Button Content="Редактировать"/>
+                            <Button Content="Удалить"/>
+                        </ToolBar>
+                        <ToolBar>
+                            <TextBlock Text="Перейти в планировщик" VerticalAlignment="Center"/>
+                            <Button Content="Перейти"/>
+                        </ToolBar>
+                    </ToolBarTray> 
+                    <Grid></Grid>
+                </DockPanel>
+            </TabItem>
             <TabItem Header="Планировщик"></TabItem>
             <TabItem Header="Редактор писем"></TabItem>
             <TabItem Header="Статистика"></TabItem>

@@ -6,21 +6,11 @@
         xmlns:local="clr-namespace:WPFTest"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="80,127,0,0" TextWrapping="Wrap" Text="Имя пользователя" VerticalAlignment="Top" RenderTransformOrigin="3.776,0.625"/>
-        <TextBox x:Name="UserNameEdit" HorizontalAlignment="Left" Height="23" Margin="80,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
-        <PasswordBox x:Name="PasswordBoxEdit" Margin="0,145,92,0" VerticalAlignment="Top" RenderTransformOrigin="0.177,0.547" Height="22" HorizontalAlignment="Right" Width="244">
-            <!--<PasswordBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="38.36"/>
-                    <RotateTransform Angle="-22.39"/>
-                    <TranslateTransform X="13.113" Y="-0.484"/>
-                </TransformGroup>
-            </PasswordBox.RenderTransform>-->
-        </PasswordBox>
-        <Button Content="Отправить" Margin="335,190,287,194" Click="OnSendButtonClick"/>
-        <TextBlock HorizontalAlignment="Right" Margin="0,124,287,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" RenderTransformOrigin="3.776,0.625"/>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File"/>
+        </Menu>                   
+        <Grid/>
 
-    </Grid>
+    </DockPanel>
 </Window>
