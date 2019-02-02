@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\Debug\SchedulerTasks.cs" />
+    <Compile Include="Data\Debug\Senders.cs" />
+    <Compile Include="Data\Debug\Servers.cs" />
     <Compile Include="MailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scheduler.cs" />
