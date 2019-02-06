@@ -9,11 +9,12 @@
         xmlns:c="clr-namespace:MailSender.Controls"
         xmlns:vm="clr-namespace:MailSender.ViewModels"
         xmlns:debugData="clr-namespace:MailSender.lib.Data.DebugData;assembly=MailSender.lib"
-        Title="{Binding Text}" 
-        Height="367" Width="934">
-    <Window.DataContext>
+        Height="367" Width="934"
+        Title="{Binding Title}"
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
+    <!--<Window.DataContext>
         <vm:TestViewModel/>    
-    </Window.DataContext>
+    </Window.DataContext>-->
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -31,16 +32,16 @@
                               Backvard="OnBackvard"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
-            <TextBlock Text="Готов к труду и обороне!"/>
+            <TextBlock Text="{Binding Status}"/>
         </StatusBar>
         <TabControl Name="MainTabControl">
-            <TabItem Header="MVVM">
+            <!--<TabItem Header="MVVM">
                 <StackPanel>
                     <TextBlock Text="{Binding Text}"/>
                     <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox Text="{Binding Text}"/>
                 </StackPanel>
-            </TabItem>
+            </TabItem>-->
             <TabItem Header="Списки">
                 <DockPanel>
                     <ToolBarTray DockPanel.Dock="Top">
@@ -95,15 +96,12 @@
                         </ToolBar>
                     </ToolBarTray>
                     <GroupBox Header="Список получателей писем">
-                        <GroupBox.Resources>
-                            <linq2sql:MailDatabaseContext x:Key="MailData" />
-                        </GroupBox.Resources>
                         <DataGrid AutoGenerateColumns="False"
                                   HorizontalGridLinesBrush="{x:Null}"
                                   VerticalGridLinesBrush="DarkGray"
                                   AlternatingRowBackground="LightGray"
                                   IsReadOnly="True"
-                                  ItemsSource="{Binding Recipient, Source={StaticResource MailData}}">
+                                  ItemsSource="{Binding Recipients}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="#" MinWidth="30" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="Адрес" MinWidth="150" Binding="{Binding Address}"/>

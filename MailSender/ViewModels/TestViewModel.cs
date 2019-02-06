@@ -7,7 +7,7 @@ using MailSender.lib.MVVM;
 
 namespace MailSender.ViewModels
 {
-    class TestViewModel : ViewModel
+    class TestViewModel : lib.MVVM.ViewModel
     {
         private string _Text = "TestValue";
 
