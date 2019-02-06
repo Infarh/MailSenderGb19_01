@@ -34,6 +34,7 @@
     <Reference Include="PasswordServiceLib">
       <HintPath>..\lib\PasswordServiceLib.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />

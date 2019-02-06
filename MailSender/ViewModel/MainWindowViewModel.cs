@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using MailSender.lib.Data.Linq2SQL;
 using MailSender.lib.Interfaces;
 
@@ -30,19 +32,40 @@ namespace MailSender.ViewModel
             set => Set(ref _Status, value);
         }
 
-        private ObservableCollection<Recipient> _Recipients;
-        public ObservableCollection<Recipient> Recipients
+        //private ObservableCollection<Recipient> _Recipients;
+        public ObservableCollection<Recipient> Recipients { get; } = new ObservableCollection<Recipient>();
+        //{
+        //    get
+        //    {
+        //        if (_Recipients != null) return _Recipients;
+        //        _Recipients = new ObservableCollection<Recipient>(_RecipientsData.GetAll());
+        //        return _Recipients;
+        //    }
+        //}
+
+        public ICommand UpdateRecipientsCommand { get; }
+        private bool CanUpdateRecipientsCommandExecuted() => true;
+        private void OnUpdateRecipientsCommandExecuted()
         {
-            get
-            {
-                if (_Recipients != null) return _Recipients;
-                _Recipients = new ObservableCollection<Recipient>(_RecipientsData.GetAll());
-                return _Recipients;
-            }
+            Recipients.Clear();
+            foreach (var recipient in _RecipientsData.GetAll())
+                Recipients.Add(recipient);
         }
+
+        private Recipient _CurrentRecipient;
+
+        public Recipient CurrentRecipient
+        {
+            get => _CurrentRecipient;
+            set => Set(ref _CurrentRecipient, value);
+        } 
+
+        public ICommand SaveRecipientCommand { get; }
 
         public MainWindowViewModel(IRecipientsData RecipientsData)
         {
+            UpdateRecipientsCommand = new RelayCommand(OnUpdateRecipientsCommandExecuted, CanUpdateRecipientsCommandExecuted);
+
             _RecipientsData = RecipientsData;
         }
     }
