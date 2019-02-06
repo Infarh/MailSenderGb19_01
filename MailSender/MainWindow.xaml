@@ -7,8 +7,13 @@
         xmlns:debug="clr-namespace:MailSender.lib.Data.Debug;assembly=MailSender.lib"
         xmlns:linq2sql="clr-namespace:MailSender.lib.Data.Linq2SQL;assembly=MailSender.lib"
         xmlns:c="clr-namespace:MailSender.Controls"
+        xmlns:vm="clr-namespace:MailSender.ViewModels"
         xmlns:debugData="clr-namespace:MailSender.lib.Data.DebugData;assembly=MailSender.lib"
-        Title="MainWindow" Height="367" Width="934">
+        Title="{Binding Text}" 
+        Height="367" Width="934">
+    <Window.DataContext>
+        <vm:TestViewModel/>    
+    </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -29,6 +34,13 @@
             <TextBlock Text="Готов к труду и обороне!"/>
         </StatusBar>
         <TabControl Name="MainTabControl">
+            <TabItem Header="MVVM">
+                <StackPanel>
+                    <TextBlock Text="{Binding Text}"/>
+                    <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Text="{Binding Text}"/>
+                </StackPanel>
+            </TabItem>
             <TabItem Header="Списки">
                 <DockPanel>
                     <ToolBarTray DockPanel.Dock="Top">
