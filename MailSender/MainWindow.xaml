@@ -7,6 +7,7 @@
         xmlns:debug="clr-namespace:MailSender.lib.Data.Debug;assembly=MailSender.lib"
         xmlns:linq2sql="clr-namespace:MailSender.lib.Data.Linq2SQL;assembly=MailSender.lib"
         xmlns:c="clr-namespace:MailSender.Controls"
+        xmlns:debugData="clr-namespace:MailSender.lib.Data.DebugData;assembly=MailSender.lib"
         Title="MainWindow" Height="367" Width="934">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -120,14 +121,14 @@
                         <Button>Отправить сейчас</Button>
                     </StackPanel>
                     <GroupBox Grid.Column="1" Header="Задачи планировщика">
-                        <ListBox ItemsSource="{x:Static debug:SchedulerTasks.Items}">
+                        <ListBox ItemsSource="{x:Static debugData:SchedulerTasks.Items}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="{x:Type ListBoxItem}">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                 </Style>
                             </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
-                                <DataTemplate DataType="{x:Type debug:SchedulerTask}">
+                                <DataTemplate DataType="{x:Type debugData:SchedulerTask}">
                                     <GroupBox>
                                         <GroupBox.Header>
                                             <StackPanel Orientation="Horizontal">

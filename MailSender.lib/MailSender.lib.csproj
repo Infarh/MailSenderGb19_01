@@ -46,9 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Database.cs" />
-    <Compile Include="Data\Debug\SchedulerTasks.cs" />
-    <Compile Include="Data\Debug\Senders.cs" />
-    <Compile Include="Data\Debug\Servers.cs" />
+    <Compile Include="Data\DebugData\SchedulerTasks.cs" />
+    <Compile Include="Data\DebugData\Senders.cs" />
+    <Compile Include="Data\DebugData\Servers.cs" />
     <Compile Include="Data\Linq2SQL\MailDatabase.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
