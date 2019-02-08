@@ -54,6 +54,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MailDatabase.dbml</DependentUpon>
     </Compile>
+    <Compile Include="InLinq2SQLRecipientsData.cs" />
     <Compile Include="InMemoryRecipientsData.cs" />
     <Compile Include="Interfaces\IRecipientsData.cs" />
     <Compile Include="MailService.cs" />
