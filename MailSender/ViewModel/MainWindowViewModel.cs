@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
+using MailSender.lib.Data.Linq2SQL;
+using MailSender.lib.Interfaces;
 
 namespace MailSender.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private IRecipientsData _RecipientsData;
+
         private string _Title = "Рассылщик почты";
 
         public string Title
@@ -23,6 +28,22 @@ namespace MailSender.ViewModel
         {
             get => _Status;
             set => Set(ref _Status, value);
+        }
+
+        private ObservableCollection<Recipient> _Recipients;
+        public ObservableCollection<Recipient> Recipients
+        {
+            get
+            {
+                if (_Recipients != null) return _Recipients;
+                _Recipients = new ObservableCollection<Recipient>(_RecipientsData.GetAll());
+                return _Recipients;
+            }
+        }
+
+        public MainWindowViewModel(IRecipientsData RecipientsDara)
+        {
+            _RecipientsData = RecipientsDara;
         }
     }
 }

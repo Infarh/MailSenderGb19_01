@@ -54,6 +54,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MailDatabase.dbml</DependentUpon>
     </Compile>
+    <Compile Include="InMemoryRecipientsData.cs" />
+    <Compile Include="Interfaces\IRecipientsData.cs" />
     <Compile Include="MailService.cs" />
     <Compile Include="MVVM\LambdaCommand.cs" />
     <Compile Include="MVVM\ViewModel.cs" />

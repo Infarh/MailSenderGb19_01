@@ -9,7 +9,8 @@
         xmlns:c="clr-namespace:MailSender.Controls"
         xmlns:vm="clr-namespace:MailSender.ViewModels"
         xmlns:controls="clr-namespace:MailSender.Controls"
-        Title="MainWindow" Height="367" Width="934">
+        Title="{Binding Title}" Height="367" Width="934"
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
     <!--<Window.DataContext>
         <vm:TestViewModel/>
     </Window.DataContext>-->
@@ -30,7 +31,7 @@
                               Backvard="OnBackvard"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
-            <TextBlock Text="Готов к труду и обороне!"/>
+            <TextBlock Text="{Binding Status}"/>
         </StatusBar>
         <TabControl x:Name="MainTabControl">
             <!--<TabItem Header="MVVM">
@@ -117,15 +118,12 @@
                         </ToolBar>
                     </ToolBarTray>
                     <GroupBox Header="Список получателей писем">
-                        <GroupBox.Resources>
-                            <linq2sql:MailDatabaseContext x:Key="MailData" />
-                        </GroupBox.Resources>
                         <DataGrid AutoGenerateColumns="False"
                                   HorizontalGridLinesBrush="{x:Null}"
                                   VerticalGridLinesBrush="DarkGray"
                                   AlternatingRowBackground="LightGray"
                                   IsReadOnly="True"
-                                  ItemsSource="{Binding Recipient, Source={StaticResource MailData}}">
+                                  ItemsSource="{Binding Recipients}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="#" MinWidth="30" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="Адрес" MinWidth="150" Binding="{Binding Address}"/>
