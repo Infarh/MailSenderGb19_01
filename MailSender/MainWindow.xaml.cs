@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using MailSender.lib.Data.Debug;
+using MailSender.lib.Data.DebugData;
 
 namespace MailSender
 {
     public partial class MainWindow
-    {
+    { 
         public MainWindow() => InitializeComponent();
 
         private void OnForvard(object Sender, EventArgs E)
