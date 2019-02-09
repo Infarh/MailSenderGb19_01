@@ -3,17 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  mc:Ignorable="d"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MailSender"
         xmlns:linq2sql="clr-namespace:MailSender.lib.Data.Linq2SQL;assembly=MailSender.lib"
         xmlns:debugData="clr-namespace:MailSender.lib.Data.DebugData;assembly=MailSender.lib"
         xmlns:c="clr-namespace:MailSender.Controls"
         xmlns:vm="clr-namespace:MailSender.ViewModels"
+        xmlns:v="clr-namespace:MailSender.Views"
         xmlns:controls="clr-namespace:MailSender.Controls"
-        Title="{Binding Title}" Height="367" Width="934"
+        Title="{Binding Title}" Height="500" Width="1000"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
     <!--<Window.DataContext>
         <vm:TestViewModel/>
     </Window.DataContext>-->
+    <Window.Resources>
+        <Style TargetType="{x:Type fa:ImageAwesome}">
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush>
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="-176" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF00E8FF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="3" BlurRadius="2" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -50,7 +78,7 @@
                                 <Setter Property="Height" Value="20"/>
                             </Style>
                         </ToolBarTray.Resources>
-                        <ToolBar x:Name="tbSmpt">
+                        <!--<ToolBar x:Name="tbSmpt">
                             <Label x:Name="ISmtp" Content="Выбрать smtp-server:" Margin="18,0,0,0" Padding="5,5,2,5"/>
                             <ComboBox x:Name="cbSmtpSelect" MinWidth="170" MaxWidth="200" SelectedIndex="0"
                                       ItemsSource="{x:Static debugData:Servers.Items}">
@@ -64,15 +92,25 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                             <Button ToolTip="Добавить" x:Name="btnAddSmtp">
-                                <Image Source="src/add.png"/>
+                                --><!--<Image Source="src/add.png"/>--><!--
+                                <fa:ImageAwesome Icon="Plus"/>
                             </Button>
                             <Button ToolTip="Редактировать" x:Name="btnEditSmtp">
-                                <Image Source="src/edit.png"/>
+                                --><!--<Image Source="src/edit.png"/>--><!--
+                                <fa:ImageAwesome Icon="Edit"/>
+
                             </Button>
                             <Button ToolTip="Удалить" x:Name="btnDeleteSmtp">
-                                <Image Source="src/remove.png"/>
+                                --><!--<Image Source="src/remove.png"/>--><!--
+                                <fa:ImageAwesome Icon="TrashOutline"/>
+
                             </Button>
+                        </ToolBar>-->
+                        <ToolBar Width="400">
+                            <controls:ToolBarSelectSenderOrServer/>
                         </ToolBar>
+                        
+                        
                         <ToolBar Band="1">
                             <TextBlock Text="Отправители:" VerticalAlignment="Center" Margin="65,0,0,0" />
                             <ComboBox x:Name="cbSenderSelect" MinWidth="170" MaxWidth="200" SelectedIndex="0"
@@ -87,37 +125,37 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                             <Button ToolTip="Добавить" x:Name="btnAddSender">
-                                <Image Source="src/add.png"/>
+                                <fa:ImageAwesome Icon="Plus"/>
                             </Button>
                             <Button ToolTip="Редактировать" x:Name="btnEditSender">
-                                <Image Source="src/edit.png"/>
+                                <fa:ImageAwesome Icon="Edit"/>
                             </Button>
                             <Button ToolTip="Удалить" x:Name="btnDeleteSender">
-                                <Image Source="src/remove.png"/>
+                                <fa:ImageAwesome Icon="TrashOutline"/>
                             </Button>
                         </ToolBar>
 
                         <ToolBar Band="1" BandIndex="1" x:Name="tbAddressee">
                             <TextBlock Text="Список адресатов:" VerticalAlignment="Center" Margin="5,0,5,0" />
                             <Button ToolTip="Добавить" x:Name="btnAddAddressee">
-                                <Image Source="src/add.png"/>
+                                <fa:ImageAwesome Icon="Plus"/>
                             </Button>
                             <Button ToolTip="Редактировать" x:Name="btnEditAddressee">
-                                <Image Source="src/edit.png"/>
+                                <fa:ImageAwesome Icon="Edit"/>
                             </Button>
                             <Button ToolTip="Удалить" x:Name="btnDeleteAddressee">
-                                <Image Source="src/remove.png"/>
+                                <fa:ImageAwesome Icon="TrashOutline"/>
                             </Button>
                         </ToolBar>
 
                         <ToolBar>
                             <TextBlock Text="Перейти в планировщик" VerticalAlignment="Center" Margin="5,0,0,0"/>
                             <Button Width="186" Margin="-140,0,0,0" Padding="143,2,2,2" Click="btnClock_Click">
-                                <Image Source="src/clock.png"/>
+                                <fa:ImageAwesome Icon="ClockOutline"/>
                             </Button>
                         </ToolBar>
                     </ToolBarTray>
-                    <GroupBox Header="Список получателей писем">
+                    <!--<GroupBox Header="Список получателей писем">
                         <DataGrid AutoGenerateColumns="False"
                                   HorizontalGridLinesBrush="{x:Null}"
                                   VerticalGridLinesBrush="DarkGray"
@@ -130,14 +168,27 @@
                                 <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Name}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                    </GroupBox>
+                    </GroupBox>-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="21*"/>
+                            <ColumnDefinition Width="595*"/>
+                            <ColumnDefinition Width="370*"/>
+                        </Grid.ColumnDefinitions>
+                        <v:RicipientsView Grid.Column="0" Grid.ColumnSpan="2"/>
+                        <v:RecipientEditor Grid.Column="2"/>
+                        <GridSplitter Grid.Column="1"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Right"
+                                      Width="3" Background="Transparent"/>
+                    </Grid>
                 </DockPanel>
             </TabItem>
             <TabItem x:Name="tabPlanner">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Планировщик"/>
-                        <Image Height="18" Source="src/scheduler.png" Margin="5,0,0,0"/>
+                        <fa:ImageAwesome Icon="Calendar" Margin="5,0,0,0"/>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
