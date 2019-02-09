@@ -24,5 +24,18 @@ namespace MailSender.Views
         {
             InitializeComponent();
         }
+
+        private void Validation_OnError(object Sender, ValidationErrorEventArgs E)
+        {
+            if(!(E.Source is FrameworkElement conrtol)) return;
+            if (E.Action == ValidationErrorEventAction.Added)
+            {
+                conrtol.ToolTip = E.Error.ErrorContent.ToString();
+            }
+            else
+            {
+                conrtol.ToolTip = "";
+            }
+        }
     }
 }
