@@ -8,7 +8,6 @@
         xmlns:debug="clr-namespace:MailSender.lib.Data.Debug;assembly=MailSender.lib"
         xmlns:linq2sql="clr-namespace:MailSender.lib.Data.Linq2SQL;assembly=MailSender.lib"
         xmlns:c="clr-namespace:MailSender.Controls"
-        xmlns:vm="clr-namespace:MailSender.ViewModels"
         xmlns:v="clr-namespace:MailSender.Views"
         xmlns:debugData="clr-namespace:MailSender.lib.Data.DebugData;assembly=MailSender.lib"
         Height="367" Width="934"

@@ -14,7 +14,7 @@ namespace MailSender.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private IRecipientsData _RecipientsData;
+        private readonly IRecipientsData _RecipientsData;
 
         private string _Title = "Рассыльщик почты";
 
@@ -32,16 +32,7 @@ namespace MailSender.ViewModel
             set => Set(ref _Status, value);
         }
 
-        //private ObservableCollection<Recipient> _Recipients;
         public ObservableCollection<Recipient> Recipients { get; } = new ObservableCollection<Recipient>();
-        //{
-        //    get
-        //    {
-        //        if (_Recipients != null) return _Recipients;
-        //        _Recipients = new ObservableCollection<Recipient>(_RecipientsData.GetAll());
-        //        return _Recipients;
-        //    }
-        //}
 
         public ICommand UpdateRecipientsCommand { get; }
         private bool CanUpdateRecipientsCommandExecuted() => true;
