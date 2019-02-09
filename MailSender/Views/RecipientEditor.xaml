@@ -6,9 +6,13 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:l="clr-namespace:MailSender.Views"
              xmlns:vr="clr-namespace:MailSender.Infrastructure.ValidationRules"
+             xmlns:c="clr-namespace:MailSender.Infrastructure.Converters"
              mc:Ignorable="d"
              DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
              d:DesignHeight="130" d:DesignWidth="255">
+    <UserControl.Resources>
+        <c:DebugBinding x:Key="BindingDebugger"/>
+    </UserControl.Resources>
     <Grid DataContext="{Binding CurrentRecipient}" Margin="5"
           Validation.Error="Validation_OnError">
         <Grid.RowDefinitions>
@@ -28,10 +32,10 @@
         <TextBlock Grid.Column="0" Grid.Row="3">Адрес:</TextBlock>
 
         <TextBox Grid.Column="1" Grid.Row="1" 
-                 Text="{Binding Id, NotifyOnValidationError=True}" 
+                 Text="{Binding Id, NotifyOnValidationError=True, Converter={c:DebugBinding}}" 
                   />
         <TextBox Grid.Column="1" Grid.Row="2" 
-                 Text="{Binding Name, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+                 Text="{Binding Name, NotifyOnValidationError=True, ValidatesOnDataErrors=True, Converter={StaticResource BindingDebugger}}"/>
         <!--<TextBox Grid.Column="1" Grid.Row="3" 
                  Text="{Binding Address, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, ValidatesOnExceptions=True}"/>-->
         <TextBox Grid.Column="1" Grid.Row="3">
@@ -47,6 +51,9 @@
             </Validation.ErrorTemplate>
             <TextBox.Text>
                 <Binding Path="Address" NotifyOnValidationError="True">
+                    <Binding.Converter>
+                        <c:DebugBinding/>
+                    </Binding.Converter>
                     <Binding.ValidationRules>
                         <vr:RegexpValidationRule RegExpr="\w+@\w+\.\w+" ErrorMessage="Ошибка формата адреса электронной почты"/>
                     </Binding.ValidationRules>
@@ -54,8 +61,11 @@
             </TextBox.Text>
         </TextBox>
 
-        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Content="Сохранить"
+        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" 
+                Content="Сохранить"
                 Command="{Binding DataContext.SaveRecipientCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" Padding="20,3"/>
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top" 
+                Margin="0,10" Padding="20,3"/>
     </Grid>
 </UserControl>
