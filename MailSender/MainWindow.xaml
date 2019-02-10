@@ -3,11 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MailSender"
         xmlns:debug="clr-namespace:MailSender.lib.Data.Debug;assembly=MailSender.lib"
         xmlns:linq2sql="clr-namespace:MailSender.lib.Data.Linq2SQL;assembly=MailSender.lib"
         xmlns:c="clr-namespace:MailSender.Controls"
-        Title="MainWindow" Height="367" Width="934">
+        xmlns:v="clr-namespace:MailSender.Views"
+        xmlns:debugData="clr-namespace:MailSender.lib.Data.DebugData;assembly=MailSender.lib"
+        Height="367" Width="934"
+        Title="{Binding Title}"
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
+    <!--<Window.DataContext>
+        <vm:TestViewModel/>    
+    </Window.DataContext>-->
+    <Window.Resources>
+        <Style TargetType="{x:Type fa:ImageAwesome}">
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="-45" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#FF0C00FD" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="1.5" BlurRadius="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -25,9 +59,16 @@
                               Backvard="OnBackvard"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
-            <TextBlock Text="Готов к труду и обороне!"/>
+            <TextBlock Text="{Binding Status}"/>
         </StatusBar>
         <TabControl Name="MainTabControl">
+            <!--<TabItem Header="MVVM">
+                <StackPanel>
+                    <TextBlock Text="{Binding Text}"/>
+                    <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Text="{Binding Text}"/>
+                </StackPanel>
+            </TabItem>-->
             <TabItem Header="Списки">
                 <DockPanel>
                     <ToolBarTray DockPanel.Dock="Top">
@@ -42,13 +83,16 @@
                                       ItemsSource="{x:Static debug:Servers.Items}"
                                       DisplayMemberPath="Name"/>
                             <Button ToolTip="Добавить">
-                                <Image Source="src/add.png"/>
+                                <!--<Image Source="src/add.png"/>-->
+                                <fa:ImageAwesome Icon="Plus"/>
                             </Button>
                             <Button ToolTip="Редактировать">
-                                <Image Source="src/edit.png"/>
+                                <!--<Image Source="src/edit.png"/>-->
+                                <fa:ImageAwesome Icon="Edit"/>
                             </Button>
                             <Button ToolTip="Удалить">
-                                <Image Source="src/remove.png"/>
+                                <!--<Image Source="src/remove.png"/>-->
+                                <fa:ImageAwesome  Icon="TrashOutline"/>
                             </Button>
                         </ToolBar>
                         <ToolBar Band="1">
@@ -65,46 +109,59 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                             <Button ToolTip="Добавить">
-                                <Image Source="src/add.png"/>
+                                <!--<Image Source="src/add.png"/>-->
+                                <fa:ImageAwesome Icon="Plus"/>
                             </Button>
                             <Button ToolTip="Редактировать">
-                                <Image Source="src/edit.png"/>
+                                <!--<Image Source="src/edit.png"/>-->
+                                <fa:ImageAwesome Icon="Edit"/>
                             </Button>
                             <Button ToolTip="Удалить">
-                                <Image Source="src/remove.png"/>
+                                <!--<Image Source="src/remove.png"/>-->
+                                <fa:ImageAwesome  Icon="TrashOutline"/>
                             </Button>
                         </ToolBar>
                         <ToolBar>
                             <TextBlock Text="Перейти в планировщик" VerticalAlignment="Center"/>
                             <Button>
-                                <Image Source="src/clock.png"/>
+                                <fa:ImageAwesome Icon="ClockOutline"/>
                             </Button>
                         </ToolBar>
                     </ToolBarTray>
-                    <GroupBox Header="Список получателей писем">
-                        <GroupBox.Resources>
-                            <linq2sql:MailDatabaseContext x:Key="MailData" />
-                        </GroupBox.Resources>
+                    <!--<GroupBox Header="Список получателей писем">
                         <DataGrid AutoGenerateColumns="False"
                                   HorizontalGridLinesBrush="{x:Null}"
                                   VerticalGridLinesBrush="DarkGray"
                                   AlternatingRowBackground="LightGray"
                                   IsReadOnly="True"
-                                  ItemsSource="{Binding Recipient, Source={StaticResource MailData}}">
+                                  ItemsSource="{Binding Recipients}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="#" MinWidth="30" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="Адрес" MinWidth="150" Binding="{Binding Address}"/>
                                 <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Name}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                    </GroupBox>
+                    </GroupBox>-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <v:RecipientsView Grid.Column="0"/>
+                        <v:RecipientEditor Grid.Column="1"/>
+                        <GridSplitter Grid.Column="0" 
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Right"
+                                      Width="3" Background="Transparent"/>
+                    </Grid>
                 </DockPanel>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Планировщик"/>
-                        <Image Height="18" Source="src/scheduler.png" Margin="5,0,0,0"/>
+                        <fa:ImageAwesome Icon="Calendar" Margin="5,0,0,0"/>
+                        <!--<Image Height="18" Source="src/scheduler.png" Margin="5,0,0,0"/>-->
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
@@ -120,14 +177,14 @@
                         <Button>Отправить сейчас</Button>
                     </StackPanel>
                     <GroupBox Grid.Column="1" Header="Задачи планировщика">
-                        <ListBox ItemsSource="{x:Static debug:SchedulerTasks.Items}">
+                        <ListBox ItemsSource="{x:Static debugData:SchedulerTasks.Items}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="{x:Type ListBoxItem}">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                 </Style>
                             </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
-                                <DataTemplate DataType="{x:Type debug:SchedulerTask}">
+                                <DataTemplate DataType="{x:Type debugData:SchedulerTask}">
                                     <GroupBox>
                                         <GroupBox.Header>
                                             <StackPanel Orientation="Horizontal">
