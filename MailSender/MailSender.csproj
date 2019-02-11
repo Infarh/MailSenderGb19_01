@@ -91,6 +91,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ListViewItemScheduler.xaml.cs">
+      <DependentUpon>ListViewItemScheduler.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\Converters\DebugBinding.cs" />
     <Compile Include="Infrastructure\ValidationRules\RegexpValidationRule.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -101,6 +104,10 @@
     <Compile Include="Views\RecipientsView.xaml.cs">
       <DependentUpon>RecipientsView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\ListViewItemScheduler.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TabViewManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

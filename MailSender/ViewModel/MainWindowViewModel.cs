@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using MailSender.lib.Data.DebugData;
 using MailSender.lib.Data.Linq2SQL;
 using MailSender.lib.Interfaces;
 
@@ -53,12 +54,34 @@ namespace MailSender.ViewModel
 
         public ICommand SaveRecipientCommand { get; }
 
+
+        #region mails
+        public ObservableCollection<Mail> Mails { get; } = new ObservableCollection<Mail>();
+
+        public ICommand AddNewElementToViewListCommand { get; }
+        private bool CanAddNewElementToViewListCommandExecuted() => true;
+        private void OnAddNewElementToViewListCommandExecuted()
+        {
+           
+        }
+
+        //public MainWindowViewModel()
+        //{
+        //    AddNewElementToViewListCommand = new RelayCommand(OnAddNewElementToViewListCommandExecuted, CanAddNewElementToViewListCommandExecuted);
+        //}
+
+        #endregion
+
+
         public MainWindowViewModel(IRecipientsData RecipientsData)
         {
+            AddNewElementToViewListCommand = new RelayCommand(OnAddNewElementToViewListCommandExecuted, CanAddNewElementToViewListCommandExecuted);
+
             UpdateRecipientsCommand = new RelayCommand(OnUpdateRecipientsCommandExecuted, CanUpdateRecipientsCommandExecuted);
 
             _RecipientsData = RecipientsData;
         }
+     
     }
 }
                                          
