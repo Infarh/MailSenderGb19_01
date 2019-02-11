@@ -10,7 +10,8 @@
         xmlns:c="clr-namespace:MailSender.Controls"
         xmlns:v="clr-namespace:MailSender.Views"
         xmlns:debugData="clr-namespace:MailSender.lib.Data.DebugData;assembly=MailSender.lib"
-        Height="367" Width="934"
+        xmlns:viewModel="clr-namespace:MailSender.ViewModel"
+        Height="600" Width="934"
         Title="{Binding Title}"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
     <!--<Window.DataContext>
@@ -159,7 +160,8 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Планировщик"/>
+                        <TextBlock><Run Text="Планировщик"/><InlineUIContainer>
+                            </InlineUIContainer></TextBlock>
                         <fa:ImageAwesome Icon="Calendar" Margin="5,0,0,0"/>
                         <!--<Image Height="18" Source="src/scheduler.png" Margin="5,0,0,0"/>-->
                     </StackPanel>
@@ -171,8 +173,18 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel>
                         <Calendar/>
-                        <TextBlock Text="Время:"/>
-                        <TextBox/>
+                        <Button Content="Добавить письмо"
+                                Command="{Binding AddNewElementToViewListCommand}"/>
+                        <ListView Height="270" ItemsSource="{x:Static debugData:MailsList.Items}">
+                            <ListView.ItemTemplate>
+                                 <DataTemplate DataType="{x:Type debugData:Mail}">
+                                     <StackPanel Orientation="Horizontal">
+                                         <TextBlock Text="{Binding strMessage}"/>
+                                         <c:ListViewItemScheduler Margin="10,0,0,0"/>
+                                     </StackPanel>
+                                 </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                         <Button>Запланировать</Button>
                         <Button>Отправить сейчас</Button>
                     </StackPanel>
