@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,14 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
+            ThreadTest.Test();
+            
             Console.ReadLine();
+            Console.WriteLine("Главный поток завершён");
+
+            //System.Collections.Concurrent.BlockingCollection<>
+            //System.Collections.Concurrent.ConcurrentBag<>
+            //System.Collections.Concurrent.ConcurrentDictionary<>
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security;
+using System.Threading;
 using MailSender.lib.Interfaces;
 
 namespace MailSender.Infrastructure
@@ -13,7 +15,7 @@ namespace MailSender.Infrastructure
         }
     }
 
-    internal class DebugMailSender : IMailSender, IDisposable
+    internal class DebugMailSender : IMailSender
     {
         private readonly string _Address;
         private readonly int _Port;
@@ -41,6 +43,29 @@ namespace MailSender.Infrastructure
                 _Address, _Port, _Ssl,
                 _Login, SenderAddress, RecipientAddress,
                 Subject, Body);
+        }
+
+        public void SendAsync(string SenderAddress, string RecipientAddress, string Subject, string Body)
+        {
+            var thread = new Thread(() => Send(SenderAddress, RecipientAddress, Subject, Body))
+            {
+                Priority = ThreadPriority.BelowNormal,
+                IsBackground = true
+            };
+            thread.Start();
+        }
+
+        public void Send(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body)
+        {
+            foreach (var recipient in RecipientsAddresses)
+                Send(SenderAddress, recipient, Subject, Body);
+        }
+
+        public void SendAsync(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body)
+        {
+            foreach (var recipient in RecipientsAddresses)
+                ThreadPool.QueueUserWorkItem(o => Send(SenderAddress, recipient, Subject, Body));
+
         }
 
         public void Dispose()
