@@ -15,6 +15,7 @@ namespace MailSender.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly IRecipientsData _RecipientsData;
+        private readonly IMailService _MailService;
 
         private string _Title = "Рассыльщик почты";
 
@@ -53,11 +54,14 @@ namespace MailSender.ViewModel
 
         public ICommand SaveRecipientCommand { get; }
 
-        public MainWindowViewModel(IRecipientsData RecipientsData)
+        public MainWindowViewModel(IRecipientsData RecipientsData, IMailService MailService)
         {
-            UpdateRecipientsCommand = new RelayCommand(OnUpdateRecipientsCommandExecuted, CanUpdateRecipientsCommandExecuted);
+            UpdateRecipientsCommand = new RelayCommand(
+                OnUpdateRecipientsCommandExecuted, 
+                CanUpdateRecipientsCommandExecuted);
 
             _RecipientsData = RecipientsData;
+            _MailService = MailService;
         }
     }
 }
