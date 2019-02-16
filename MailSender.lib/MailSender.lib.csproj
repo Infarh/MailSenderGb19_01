@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\DebugData\Mail.cs" />
     <Compile Include="Data\DebugData\SchedulerTasks.cs" />
     <Compile Include="Data\DebugData\Senders.cs" />
     <Compile Include="Data\DebugData\Servers.cs" />
@@ -57,9 +58,13 @@
     </Compile>
     <Compile Include="Data\Linq2SQL\Recipient.cs" />
     <Compile Include="InLinq2SQLRecipientsData.cs" />
+    <Compile Include="InMemoryMailsData.cs" />
     <Compile Include="InMemoryRecipientsData.cs" />
+    <Compile Include="Interfaces\IData.cs" />
+    <Compile Include="Interfaces\IMailsData.cs" />
     <Compile Include="Interfaces\IMailService.cs" />
     <Compile Include="Interfaces\IRecipientsData.cs" />
+    <Compile Include="Interfaces\ISendersData.cs" />
     <Compile Include="MailService.cs" />
     <Compile Include="MVVM\LamdaCommand.cs" />
     <Compile Include="MVVM\ViewModel.cs" />

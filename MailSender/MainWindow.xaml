@@ -208,10 +208,22 @@
                         <DockPanel MinWidth="150" MaxWidth="200">
                             <Button DockPanel.Dock="Bottom">Создать</Button>
                             <Button DockPanel.Dock="Bottom">Сохранить</Button>
-                            <ListBox></ListBox>
+                            <ListBox ItemsSource="{Binding Mails}" 
+                                     DisplayMemberPath="Subject"
+                                     SelectedItem="{Binding SelectedMail}"
+                                     Name="MailsList"/>
                         </DockPanel>
                     </GroupBox>
-                    <GroupBox Header="Текст письма"></GroupBox>
+                    <Grid DataContext="{Binding SelectedMail}">
+                        <DockPanel>
+                            <GroupBox Header="Заголовок" DockPanel.Dock="Top">
+                                <TextBox Text="{Binding Subject}"/>
+                            </GroupBox>
+                            <GroupBox Header="Текст письма">
+                                <TextBox Text="{Binding Body}"/>
+                            </GroupBox>
+                        </DockPanel>
+                    </Grid>
                 </DockPanel>         
             </TabItem>
             <!--<TabItem Header="Статистика" IsEnabled="False"/>-->

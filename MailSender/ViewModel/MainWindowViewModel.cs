@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using MailSender.lib.Data.DebugData;
 using MailSender.lib.Data.Linq2SQL;
 using MailSender.lib.Interfaces;
 
@@ -16,6 +17,7 @@ namespace MailSender.ViewModel
     {
         private readonly IRecipientsData _RecipientsData;
         private readonly IMailService _MailService;
+        private readonly IMailsData _MailsData;
 
         private string _Title = "Рассыльщик почты";
 
@@ -35,6 +37,8 @@ namespace MailSender.ViewModel
 
         public ObservableCollection<Recipient> Recipients { get; } = new ObservableCollection<Recipient>();
 
+        public ObservableCollection<Mail> Mails { get; } = new ObservableCollection<Mail>();
+
         public ICommand UpdateRecipientsCommand { get; }
         private bool CanUpdateRecipientsCommandExecuted() => true;
         private void OnUpdateRecipientsCommandExecuted()
@@ -50,18 +54,33 @@ namespace MailSender.ViewModel
         {
             get => _CurrentRecipient;
             set => Set(ref _CurrentRecipient, value);
-        } 
+        }
+
+        private Mail _SelectedMail;
+
+        public Mail SelectedMail
+        {
+            get => _SelectedMail;
+            set => Set(ref _SelectedMail, value);
+        }
 
         public ICommand SaveRecipientCommand { get; }
 
-        public MainWindowViewModel(IRecipientsData RecipientsData, IMailService MailService)
+        public MainWindowViewModel(
+            IRecipientsData RecipientsData,
+            IMailsData MailsData,
+            IMailService MailService)
         {
             UpdateRecipientsCommand = new RelayCommand(
                 OnUpdateRecipientsCommandExecuted, 
                 CanUpdateRecipientsCommandExecuted);
 
             _RecipientsData = RecipientsData;
+            _MailsData = MailsData;
             _MailService = MailService;
+
+            foreach (var mail in _MailsData.GetAll())
+                Mails.Add(mail);
         }
     }
 }
