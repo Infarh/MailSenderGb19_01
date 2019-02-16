@@ -14,14 +14,8 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            ThreadTest.Test();
-            
             Console.ReadLine();
             Console.WriteLine("Главный поток завершён");
-
-            //System.Collections.Concurrent.BlockingCollection<>
-            //System.Collections.Concurrent.ConcurrentBag<>
-            //System.Collections.Concurrent.ConcurrentDictionary<>
         }
     }
 }
