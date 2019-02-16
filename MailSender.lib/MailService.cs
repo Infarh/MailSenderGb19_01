@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security;
 using System.Threading;
+using System.Threading.Tasks;
 using MailSender.lib.Interfaces;
 
 namespace MailSender.lib
@@ -34,7 +36,14 @@ namespace MailSender.lib
                 _Client.Send(msg);
         }
 
-        public void SendAsync(string SenderAddress, string RecipientAddress, string Subject, string Body)
+        public async Task SendAsync(string SenderAddress, string RecipientAddress, string Subject, string Body)
+        {
+            using (var msg = new MailMessage(SenderAddress, RecipientAddress, Subject, Body))
+                await _Client.SendMailAsync(msg)
+                    .ConfigureAwait(false);
+        }
+
+        public void SendParallel(string SenderAddress, string RecipientAddress, string Subject, string Body)
         {
             var thread = new Thread(() => Send(SenderAddress, RecipientAddress, Subject, Body));
             thread.Priority = ThreadPriority.BelowNormal;
@@ -48,7 +57,14 @@ namespace MailSender.lib
                 Send(SenderAddress, recipient, Subject, Body);
         }
 
-        public void SendAsync(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body)
+        public Task SendAsync(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body)
+        {
+            return Task.WhenAll(
+                RecipientsAddresses
+                    .Select(recipient => SendAsync(SenderAddress, recipient, Subject, Body)));
+        }
+
+        public void SendParallel(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body)
         {
             foreach (var recipient in RecipientsAddresses)
                 ThreadPool.QueueUserWorkItem(o => Send(SenderAddress, recipient, Subject, Body));

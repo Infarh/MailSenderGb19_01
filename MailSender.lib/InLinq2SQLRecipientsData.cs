@@ -22,15 +22,30 @@ namespace MailSender.lib
             return _db.Recipient.AsEnumerable();
         }
 
+        public async Task<IEnumerable<Recipient>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public Recipient GetById(int id)
         {
             return _db.Recipient.FirstOrDefault(r => r.Id == id);
+        }
+
+        public async Task<Recipient> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public void AddNew(Recipient NewRecipient)
         {
             NewRecipient.Id = _db.Recipient.Max(r => r.Id) + 1;
             _db.Recipient.InsertOnSubmit(NewRecipient);
+        }
+
+        public async Task AddNewAsync(Recipient NewItem)
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(int id)
@@ -41,9 +56,19 @@ namespace MailSender.lib
             _db.Recipient.DeleteOnSubmit(recipient);
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SaveChanges()
         {
             _db.SubmitChanges();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

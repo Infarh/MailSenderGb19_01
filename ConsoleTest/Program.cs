@@ -14,6 +14,10 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
+            //TPLTest.Test();
+            TaskTest.Test(); 
+
+            Console.WriteLine("Основная программа завершена");
             Console.ReadLine();
             Console.WriteLine("Главный поток завершён");
         }

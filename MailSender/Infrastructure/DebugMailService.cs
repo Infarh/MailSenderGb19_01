@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security;
 using System.Threading;
+using System.Threading.Tasks;
 using MailSender.lib.Interfaces;
 
 namespace MailSender.Infrastructure
@@ -45,7 +46,12 @@ namespace MailSender.Infrastructure
                 Subject, Body);
         }
 
-        public void SendAsync(string SenderAddress, string RecipientAddress, string Subject, string Body)
+        public async Task SendAsync(string SenderAddress, string RecipientAddress, string Subject, string Body)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendParallel(string SenderAddress, string RecipientAddress, string Subject, string Body)
         {
             var thread = new Thread(() => Send(SenderAddress, RecipientAddress, Subject, Body))
             {
@@ -61,7 +67,12 @@ namespace MailSender.Infrastructure
                 Send(SenderAddress, recipient, Subject, Body);
         }
 
-        public void SendAsync(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body)
+        public async Task SendAsync(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendParallel(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body)
         {
             foreach (var recipient in RecipientsAddresses)
                 ThreadPool.QueueUserWorkItem(o => Send(SenderAddress, recipient, Subject, Body));
