@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security;
 using System.Threading;
@@ -48,7 +47,8 @@ namespace MailSender.Infrastructure
 
         public async Task SendAsync(string SenderAddress, string RecipientAddress, string Subject, string Body)
         {
-            throw new NotImplementedException();
+            await Task.Yield();
+            Send(SenderAddress, RecipientAddress, Subject, Body);
         }
 
         public void SendParallel(string SenderAddress, string RecipientAddress, string Subject, string Body)
@@ -69,7 +69,8 @@ namespace MailSender.Infrastructure
 
         public async Task SendAsync(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body)
         {
-            throw new NotImplementedException();
+            await Task.Yield();
+            Send(SenderAddress, RecipientsAddresses, Subject, Body);
         }
 
         public void SendParallel(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body)

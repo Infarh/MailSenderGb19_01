@@ -17,30 +17,13 @@ namespace MailSender.lib
             new Recipient { Id = 2, Name = "Сидоров", Address = "sidorov@yandex.ru" },
         };
 
-        public InMemoryRecipientsData()
-        {
+        public IEnumerable<Recipient> GetAll() => _Recipients;
 
-        }
+        public Task<IEnumerable<Recipient>> GetAllAsync() => Task.FromResult(GetAll());
 
-        public IEnumerable<Recipient> GetAll()
-        {
-            return _Recipients;
-        }
+        public Recipient GetById(int id) => _Recipients.FirstOrDefault(r => r.Id == id);
 
-        public async Task<IEnumerable<Recipient>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Recipient GetById(int id)
-        {
-            return _Recipients.FirstOrDefault(r => r.Id == id);
-        }
-
-        public async Task<Recipient> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public Task<Recipient> GetByIdAsync(int id) => Task.FromResult(GetById(id));
 
         public void AddNew(Recipient NewRecipient)
         {
@@ -52,7 +35,8 @@ namespace MailSender.lib
 
         public async Task AddNewAsync(Recipient NewItem)
         {
-            throw new NotImplementedException();
+            await Task.Yield();
+            AddNew(NewItem);
         }
 
         public void Delete(int id)
@@ -65,7 +49,8 @@ namespace MailSender.lib
 
         public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await Task.Yield();
+            Delete(id);
         }
 
         public void SaveChanges()
@@ -73,9 +58,9 @@ namespace MailSender.lib
 
         }
 
-        public async Task SaveChangesAsync()
+        public Task SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }

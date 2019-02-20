@@ -12,30 +12,18 @@ namespace MailSender.lib
     {
         private MailDatabaseContext _db;
 
-        public InLinq2SQLRecipientsData(MailDatabaseContext DatabaseContext)
-        {
-            _db = DatabaseContext;
-        }
+        public InLinq2SQLRecipientsData(MailDatabaseContext DatabaseContext) => _db = DatabaseContext;
 
-        public IEnumerable<Recipient> GetAll()
-        {
-            return _db.Recipient.AsEnumerable();
-        }
+        public IEnumerable<Recipient> GetAll() => _db.Recipient.AsEnumerable();
 
-        public async Task<IEnumerable<Recipient>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public Task<IEnumerable<Recipient>> GetAllAsync() => Task.Run(() => (IEnumerable<Recipient>)_db.Recipient.ToArray());
 
         public Recipient GetById(int id)
         {
             return _db.Recipient.FirstOrDefault(r => r.Id == id);
         }
 
-        public async Task<Recipient> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public Task<Recipient> GetByIdAsync(int id) => Task.Run(() => GetById(id));
 
         public void AddNew(Recipient NewRecipient)
         {
@@ -43,10 +31,7 @@ namespace MailSender.lib
             _db.Recipient.InsertOnSubmit(NewRecipient);
         }
 
-        public async Task AddNewAsync(Recipient NewItem)
-        {
-            throw new NotImplementedException();
-        }
+        public Task AddNewAsync(Recipient NewItem) => Task.Run(() => AddNew(NewItem));
 
         public void Delete(int id)
         {
@@ -56,19 +41,10 @@ namespace MailSender.lib
             _db.Recipient.DeleteOnSubmit(recipient);
         }
 
-        public async Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public Task DeleteAsync(int id) => Task.Run(() => Delete(id));
 
-        public void SaveChanges()
-        {
-            _db.SubmitChanges();
-        }
+        public void SaveChanges() => _db.SubmitChanges();
 
-        public async Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public Task SaveChangesAsync() => Task.Run(() => SaveChanges());
     }
 }

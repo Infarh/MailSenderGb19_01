@@ -10,12 +10,17 @@ namespace MailSender.lib
     public class InMemoryMailsData : IMailsData
     {
         public IEnumerable<Mail> GetAll() => Mails.Items;
-        public Task<IEnumerable<Mail>> GetAllAsync() => Task.FromResult(Mails.Items.AsEnumerable());
+        public async Task<IEnumerable<Mail>> GetAllAsync()
+        {
+            await Task.Yield();
+            return Mails.Items;
+        }
 
         public Mail GetById(int id) => Mails.Items.FirstOrDefault(m => m.Id == id);
         public async Task<Mail> GetByIdAsync(int id)
         {
-            return await Task.Run(() => Mails.Items.FirstOrDefault(m => m.Id == id));
+            await Task.Yield();
+            return Mails.Items.FirstOrDefault(m => m.Id == id);
         }
 
         public void AddNew(Mail NewItem)
@@ -28,16 +33,15 @@ namespace MailSender.lib
             Mails.Items.Add(NewItem);
         }
 
-        public Task AddNewAsync(Mail NewItem)
+        public async Task AddNewAsync(Mail NewItem)
         {
-            if (Mails.Items.Contains(NewItem)) return Task.CompletedTask;
+            await Task.Yield();
+            if (Mails.Items.Contains(NewItem)) return;
             if (Mails.Items.Count > 0)
                 NewItem.Id = Mails.Items.Max(m => m.Id) + 1;
             else
                 NewItem.Id = 1;
             Mails.Items.Add(NewItem);
-
-            return Task.CompletedTask;
         }
 
         public void Delete(int id)
@@ -49,6 +53,7 @@ namespace MailSender.lib
 
         public async Task DeleteAsync(int id)
         {
+            await Task.Yield();
             var item = GetById(id);
             if (item is null) return;
             Mails.Items.Remove(item);
