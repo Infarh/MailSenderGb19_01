@@ -2,6 +2,7 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using MailSender.lib.Data;
 using MailSender.lib.Data.Context;
 
 namespace MailSender.lib.Migrations
@@ -16,10 +17,15 @@ namespace MailSender.lib.Migrations
 
         protected override void Seed(MailDatabaseContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            if (!context.Servers.Any())
+            {
+                foreach (var server in Servers.Items)
+                {
+                    context.Servers.Add(server);
+                }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+                context.SaveChanges();
+            }
         }
     }
 }

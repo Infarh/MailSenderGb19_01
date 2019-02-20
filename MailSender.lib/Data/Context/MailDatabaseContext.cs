@@ -1,11 +1,20 @@
 ﻿using System.Data.Entity;
+using MailSender.lib.Migrations;
 
 namespace MailSender.lib.Data.Context
 {
     public class MailDatabaseContext : DbContext
     {
+        static MailDatabaseContext()
+        {
+            //Database.SetInitializer(new CreateDatabaseIfNotExists<MailDatabaseContext>());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<MailDatabaseContext>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MailDatabaseContext>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MailDatabaseContext, Configuration>());
+        }
+
         public MailDatabaseContext() : base("name=MailDatabaseContext") { }
-        public MailDatabaseContext(string ConnectionStr) : base(ConnectionStr) { }
+        //public MailDatabaseContext(string ConnectionStr) : base(ConnectionStr) { }
 
         public DbSet<Mail> Mails { get; set; }
 

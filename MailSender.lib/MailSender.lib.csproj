@@ -65,6 +65,7 @@
     <Compile Include="Data\SendingList.cs" />
     <Compile Include="Data\Server.cs" />
     <Compile Include="Data\Servers.cs" />
+    <Compile Include="EFServersData.cs" />
     <Compile Include="InMemoryMailsData.cs" />
     <Compile Include="InMemoryRecipientsData.cs" />
     <Compile Include="Interfaces\IData.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Interfaces\IMailService.cs" />
     <Compile Include="Interfaces\IRecipientsData.cs" />
     <Compile Include="Interfaces\ISendersData.cs" />
+    <Compile Include="Interfaces\IServersData.cs" />
     <Compile Include="MailService.cs" />
     <Compile Include="Migrations\201902201736363_Initial.cs" />
     <Compile Include="Migrations\201902201736363_Initial.Designer.cs">

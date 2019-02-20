@@ -16,6 +16,7 @@ namespace MailSender.ViewModel
     {
         private readonly IRecipientsData _RecipientsData;
         private readonly IMailService _MailService;
+        private readonly IServersData _ServersData;
         private readonly IMailsData _MailsData;
 
         private string _Title = "Рассыльщик почты";
@@ -37,6 +38,8 @@ namespace MailSender.ViewModel
         public ObservableCollection<Recipient> Recipients { get; } = new ObservableCollection<Recipient>();
 
         public ObservableCollection<Mail> Mails { get; } = new ObservableCollection<Mail>();
+
+        public ObservableCollection<Server> Servers { get; } = new ObservableCollection<Server>();
 
         public ICommand UpdateRecipientsCommand { get; }
         private bool CanUpdateRecipientsCommandExecuted() => true;
@@ -68,7 +71,9 @@ namespace MailSender.ViewModel
         public MainWindowViewModel(
             IRecipientsData RecipientsData,
             IMailsData MailsData,
-            IMailService MailService)
+            IMailService MailService,
+            IServersData ServersData
+            )
         {
             UpdateRecipientsCommand = new RelayCommand(
                 OnUpdateRecipientsCommandExecuted, 
@@ -77,9 +82,13 @@ namespace MailSender.ViewModel
             _RecipientsData = RecipientsData;
             _MailsData = MailsData;
             _MailService = MailService;
+            _ServersData = ServersData;
 
             foreach (var mail in _MailsData.GetAll())
                 Mails.Add(mail);
+
+            foreach (var server in _ServersData.GetAll())
+                Servers.Add(server);
         }
     }
 }
