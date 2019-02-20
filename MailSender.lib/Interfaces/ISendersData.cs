@@ -1,4 +1,4 @@
-﻿using MailSender.lib.Data.Debug;
+﻿using MailSender.lib.Data;
 
 namespace MailSender.lib.Interfaces
 {

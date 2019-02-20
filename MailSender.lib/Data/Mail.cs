@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace MailSender.lib.Data.DebugData
+namespace MailSender.lib.Data
 {
     public static class Mails
     {
@@ -16,10 +12,15 @@ namespace MailSender.lib.Data.DebugData
           };
     }
 
+    /// <summary>Сообщение электронной почты</summary>
     public class Mail
     {
         public int Id { get; set; }
+
+        /// <summary>Тема письма</summary>
         public string Subject { get; set; }
+
+        /// <summary>Тело письма</summary>
         public string Body { get; set; }
     }
 }

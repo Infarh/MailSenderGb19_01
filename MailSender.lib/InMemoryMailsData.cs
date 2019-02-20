@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MailSender.lib.Data.DebugData;
+using MailSender.lib.Data;
 using MailSender.lib.Interfaces;
 
 namespace MailSender.lib

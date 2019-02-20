@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using MailSender.lib.Service;
 using PasswordServiceLib;
 
-namespace MailSender.lib.Data.Debug
+namespace MailSender.lib.Data
 {
     public static class Senders
     {
@@ -18,11 +14,18 @@ namespace MailSender.lib.Data.Debug
         };
     }
 
+    /// <summary>Отправитель сообщения электронной почты</summary>
     public class Sender
     {
         public int Id { get; set; }
+
+        /// <summary>Имя</summary>
         public string Name { get; set; }
+
+        /// <summary>Адрес электронной почты отправителя</summary>
         public string Address { get; set; }
+
+        /// <summary>Пароль</summary>
         public string Password { get; set; }
     }
 }

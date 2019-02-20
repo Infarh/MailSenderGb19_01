@@ -46,18 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Database.cs" />
-    <Compile Include="Data\DebugData\Mail.cs" />
-    <Compile Include="Data\DebugData\SchedulerTasks.cs" />
-    <Compile Include="Data\DebugData\Senders.cs" />
-    <Compile Include="Data\DebugData\Servers.cs" />
-    <Compile Include="Data\Linq2SQL\MailDatabase.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MailDatabase.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Linq2SQL\Recipient.cs" />
-    <Compile Include="InLinq2SQLRecipientsData.cs" />
+    <Compile Include="Data\Mail.cs" />
+    <Compile Include="Data\Recipient.cs" />
+    <Compile Include="Data\SchedulerTasks.cs" />
+    <Compile Include="Data\Senders.cs" />
+    <Compile Include="Data\Servers.cs" />
     <Compile Include="InMemoryMailsData.cs" />
     <Compile Include="InMemoryRecipientsData.cs" />
     <Compile Include="Interfaces\IData.cs" />
@@ -79,14 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Data\Linq2SQL\MailDatabase.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>MailDatabase.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Data\Linq2SQL\MailDatabase.dbml.layout">
-      <DependentUpon>MailDatabase.dbml</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

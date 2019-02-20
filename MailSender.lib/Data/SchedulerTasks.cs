@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MailSender.lib.Data.DebugData
+namespace MailSender.lib.Data
 {
     public static class SchedulerTasks
     {
