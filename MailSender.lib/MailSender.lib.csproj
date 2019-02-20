@@ -31,11 +31,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="PasswordServiceLib">
       <HintPath>..\lib\PasswordServiceLib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
@@ -46,13 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Context\MailDatabaseContext.cs" />
     <Compile Include="Data\Mail.cs" />
     <Compile Include="Data\Mails.cs" />
+    <Compile Include="Data\MailsList.cs" />
     <Compile Include="Data\Recipient.cs" />
     <Compile Include="Data\SchedulerTask.cs" />
     <Compile Include="Data\SchedulerTasks.cs" />
     <Compile Include="Data\Sender.cs" />
     <Compile Include="Data\Senders.cs" />
+    <Compile Include="Data\SendingList.cs" />
     <Compile Include="Data\Server.cs" />
     <Compile Include="Data\Servers.cs" />
     <Compile Include="InMemoryMailsData.cs" />
@@ -64,6 +74,15 @@
     <Compile Include="Interfaces\IRecipientsData.cs" />
     <Compile Include="Interfaces\ISendersData.cs" />
     <Compile Include="MailService.cs" />
+    <Compile Include="Migrations\201902201736363_Initial.cs" />
+    <Compile Include="Migrations\201902201736363_Initial.Designer.cs">
+      <DependentUpon>201902201736363_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902201750183_DataRestrictions.cs" />
+    <Compile Include="Migrations\201902201750183_DataRestrictions.Designer.cs">
+      <DependentUpon>201902201750183_DataRestrictions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MVVM\LamdaCommand.cs" />
     <Compile Include="MVVM\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +95,8 @@
     <Compile Include="Service\PasswordService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -83,6 +104,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201902201736363_Initial.resx">
+      <DependentUpon>201902201736363_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902201750183_DataRestrictions.resx">
+      <DependentUpon>201902201750183_DataRestrictions.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

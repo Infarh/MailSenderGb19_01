@@ -1,4 +1,6 @@
-﻿namespace MailSender.lib.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MailSender.lib.Data
 {
     /// <summary>Почтовый сервер</summary>
     public class Server
@@ -9,6 +11,7 @@
         public string Name { get; set; }
 
         /// <summary>Адрес</summary>
+        [Required, MinLength(3)/*, MaxLength(255)*/]
         public string Address { get; set; }
 
         /// <summary>Порт</summary>
@@ -16,5 +19,11 @@
 
         /// <summary>Использовать защищённое соединение</summary>
         public bool UseSSL { get; set; }
+
+        [Required]
+        public string Login { get; set; }
+
+        [Required]
+        public string Password { get; set; }
     }
 }

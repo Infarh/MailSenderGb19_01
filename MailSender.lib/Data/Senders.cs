@@ -9,9 +9,9 @@ namespace MailSender.lib.Data
     {
         public static List<Sender> Items { get; } = new List<Sender>
         {
-            new Sender { Id = 0, Name = "Иванов", Address = "ivanov@yandex.ru", Password = PasswordEncoder.Encrypt("Password1")},
-            new Sender { Id = 0, Name = "Петров", Address = "petrov@yandex.ru", Password = PasswordService.Encrypt("Password2") },
-            new Sender { Id = 0, Name = "Сидоров", Address = "sidorov@yandex.ru", Password = PasswordService.Encrypt("Password3") },
+            new Sender { Id = 0, Name = "Иванов", Address = "ivanov@yandex.ru" },
+            new Sender { Id = 0, Name = "Петров", Address = "petrov@yandex.ru" },
+            new Sender { Id = 0, Name = "Сидоров", Address = "sidorov@yandex.ru" },
         };
     }
 }
