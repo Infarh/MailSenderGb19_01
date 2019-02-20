@@ -47,14 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Mail.cs" />
+    <Compile Include="Data\Mails.cs" />
     <Compile Include="Data\Recipient.cs" />
+    <Compile Include="Data\SchedulerTask.cs" />
     <Compile Include="Data\SchedulerTasks.cs" />
+    <Compile Include="Data\Sender.cs" />
     <Compile Include="Data\Senders.cs" />
+    <Compile Include="Data\Server.cs" />
     <Compile Include="Data\Servers.cs" />
     <Compile Include="InMemoryMailsData.cs" />
     <Compile Include="InMemoryRecipientsData.cs" />
     <Compile Include="Interfaces\IData.cs" />
     <Compile Include="Interfaces\IMailsData.cs" />
+    <Compile Include="Interfaces\IMailSender.cs" />
     <Compile Include="Interfaces\IMailService.cs" />
     <Compile Include="Interfaces\IRecipientsData.cs" />
     <Compile Include="Interfaces\ISendersData.cs" />
@@ -71,7 +76,6 @@
     <Compile Include="Service\PasswordService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

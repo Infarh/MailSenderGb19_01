@@ -1,29 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MailSender.lib.Interfaces
 {
+    /// <summary>Сервис рассылки почты</summary>
     public interface IMailService
     {
+        /// <summary>Получить объект, позволяющий отправлять через себя почтовые сообщения</summary>
+        /// <param name="Address">Адрес сервера</param>
+        /// <param name="Port">Порт</param>
+        /// <param name="SSL">Использовать защищённое соединение</param>
+        /// <param name="Login">Логин</param>
+        /// <param name="Password">Пароль</param>
+        /// <returns>Объект рассылки почты</returns>
         IMailSender GetSender(string Address, int Port, bool SSL, string Login, SecureString Password);
-    }
-
-    public interface IMailSender : IDisposable
-    {
-        void Send(string SenderAddress, string RecipientAddress, string Subject, string Body);
-
-        Task SendAsync(string SenderAddress, string RecipientAddress, string Subject, string Body);
-
-        void SendParallel(string SenderAddress, string RecipientAddress, string Subject, string Body);
-
-        void Send(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body);
-
-        Task SendAsync(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body);
-
-        void SendParallel(string SenderAddress, IEnumerable<string> RecipientsAddresses, string Subject, string Body);
     }
 }
